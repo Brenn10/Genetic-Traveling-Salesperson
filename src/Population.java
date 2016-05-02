@@ -2,14 +2,13 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Population {
-	ArrayList<Gene> population=new ArrayList<Gene>();
-	int geneLength;
-	int popSize;
-	double mutationRate;
-	int tourneySize;
-	Gene best;
-	Random rand = new Random();
-	ArrayList<City> ogCities=new ArrayList<City>();
+	public  ArrayList<Gene> population=new ArrayList<Gene>();
+	private int popSize;
+	private double mutationRate;
+	private int tourneySize;
+	public  Gene best;
+	private Random rand = new Random();
+	private ArrayList<City> ogCities=new ArrayList<City>();
 	
 	/**
 	 * Creates the first generation of the population
@@ -67,7 +66,8 @@ public class Population {
 			{
 				g2=tournament();
 			}
-			newPop.add(crossover(g1, g2, rand.nextInt(g1.size())));
+			int index=rand.nextInt(g1.size());
+			newPop.add(bestGene(crossover(g1, g2, index),crossover(g2, g1, index)));
 		}
 		
 		//place the new population in the place of the old
@@ -107,13 +107,16 @@ public class Population {
 			Gene g = population.get(i);
 			for(int u =0; u < g.size();++u)
 			{
-				int other;
-				if(u+1==g.size())
-					other=u-1;
-				else
-					other=u+1;
-				City c = g.replace(g.get(u), other);
-				g.replace(c, u);
+				if(rand.nextDouble()<mutationRate)
+				{
+					int other;
+					if(u+1==g.size())
+						other=u-1;
+					else
+						other=u+1;
+					City c = g.replace(g.get(u), other);
+					g.replace(c, u);
+				}
 			}
 		}
 	}
@@ -178,6 +181,13 @@ public class Population {
 		return g;
 	}
 	
+	private Gene bestGene(Gene g1, Gene g2)
+	{
+		if(g1.distance()<g2.distance())
+			return g1;
+		return g2;
+	}
+	
 	/**
 	 * Gives the average fitness of the generation
 	 * @return average fitness
@@ -189,7 +199,7 @@ public class Population {
 		{
 			sum+=g.distance();
 		}
-		return ((double)sum)/population.size();
+		return (sum)/(double)population.size();
 	}
 	
 	/**

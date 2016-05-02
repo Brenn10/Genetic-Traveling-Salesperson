@@ -1,8 +1,18 @@
+import java.util.Random;
 
 public class City {
 	public static int number=0;
 	String name;
 	double x,y;
+	Random rand;
+	
+	public City(long randomSeed, int maxY, int maxX,String name)
+	{
+		rand = new Random(randomSeed);
+		x=rand.nextInt(maxX);
+		y=rand.nextInt(maxY);
+		this.name=name;
+	}
 	
 	public City(double x, double y, String name)
 	{
@@ -40,7 +50,7 @@ public class City {
 	
 	public String toString()
 	{
-		//return "{ name="+name+",x="+x+",y="+y+" }";
-		return name+" ";
+		return "{ name="+name+",x="+x+",y="+y+" }";
+		//return name+" ";
 	}
 }

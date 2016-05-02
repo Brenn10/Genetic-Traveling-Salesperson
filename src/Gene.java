@@ -108,9 +108,9 @@ public class Gene {
 		String ret = "{ ";
 		for(City b : gene)
 		{
-			ret+=b.toString();
+			ret+=b.toString()+",";
 		}
-		return ret+", distance="+this.distance()+" }";
+		return ret.substring(0, ret.length()-1)+", distance="+this.distance()+" }";
 	}
 	
 	public boolean contains(City city)
