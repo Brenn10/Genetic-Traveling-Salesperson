@@ -1,3 +1,4 @@
+import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -9,6 +10,13 @@ public class PopulationModel extends JComponent
 	int iteration;
 	int counter;
 	boolean solved=false;
+	
+	public PopulationModel(Gene cities)
+	{
+		iteration=0;
+		counter=0;
+		path=cities;
+	}
 	public void update(Gene path,int iteration,int counter)
 	{
 		this.iteration=iteration;
@@ -34,18 +42,13 @@ public class PopulationModel extends JComponent
 			g2.fillOval((int)path.get(i).getX()-5, (int)path.get(i).getY()-5, 10, 10);
 			if(i<path.size()-1)
 				g.drawLine((int)path.get(i).getX(), (int)path.get(i).getY(), (int)path.get(i+1).getX(), (int)path.get(i+1).getY());
-			if(solved)
+			String tmp="";
+			for(City c : path.iterable())
 			{
-				String tmp="";
-				for(City c : path.iterable())
-				{
-					tmp+= c.getName()+" ";
-				}
-				g2.drawString(tmp, 0, this.getHeight());
-				g2.drawString(path.get(i).getName(), (int)path.get(i).getX()-5, (int)path.get(i).getY()-5);
+				tmp+= c.getName()+" ";
 			}
+			g2.drawString(tmp, 0, this.getHeight());
+			g2.drawString(path.get(i).getName(), (int)path.get(i).getX()-5, (int)path.get(i).getY()-5);
 		}
-		
-		
 	}
 }

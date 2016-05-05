@@ -202,6 +202,15 @@ public class Population {
 		return (sum)/(double)population.size();
 	}
 	
+	public void reset()
+	{
+		population.clear();
+		
+		populate();
+
+		best=population.get(0);
+	}
+	
 	/**
 	 * Gives the population as a String
 	 *  @return String representation of the population

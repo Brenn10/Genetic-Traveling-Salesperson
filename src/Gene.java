@@ -9,6 +9,10 @@ public class Gene {
 	 */
 	public Gene(){}
 	
+	/**
+	 * Creates the gene from a list of cities ad randomizes them
+	 * @param path original path, to be used
+	 */
 	public Gene(ArrayList<City> path)
 	{
 		for(City c : path)
