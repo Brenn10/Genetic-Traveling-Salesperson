@@ -13,8 +13,8 @@ public class Population {
 	/**
 	 * Creates the first generation of the population
 	 * @param sizeOfPop number of individuals in the population
-	 * @param sizeOfGene number of alleles in each gene
 	 * @param mutationRate probability of a point mutation to occur
+	 * @param sizeOfGene number of alleles in each gene
 	 * @param tourneySize number of individuals to compete for mating
 	 */
 	public Population(int sizeOfPop, double mutationRate,int tourneySize,ArrayList<City> originalCities)
